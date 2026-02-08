@@ -10,6 +10,8 @@
 #include "pages/StockPage.h"
 #include "pages/MarketPage.h"
 #include "pages/AlbumPage.h"
+#include "pages/SettingsPage.h"
+#include <Preferences.h>
 
 // Hardware
 TFT_eSPI tft = TFT_eSPI();
@@ -22,7 +24,7 @@ SPIClass touchSPI = SPIClass(VSPI);
 XPT2046_Touchscreen touch(XPT2046_CS, XPT2046_IRQ);
 
 // Pages
-const int PAGE_COUNT = 4;
+const int PAGE_COUNT = 5;
 Page* pages[PAGE_COUNT];
 int currentPage = 0;
 
@@ -54,30 +56,54 @@ void drawTopBar() {
     touch.begin(touchSPI);
     touch.setRotation(1);
 
-    // WiFi
-    WiFi.begin(WIFI_SSID, WIFI_PASS);
-    tft.drawString("Connecting WiFi...", 160, 120, 4);
-    // Timeout for WiFi to avoid sticking if no connection
-    int limit = 0;
-    while (WiFi.status() != WL_CONNECTED && limit < 20) {
-        delay(500);
-        Serial.print(".");
-        limit++;
+    // WiFi from Preferences
+    Preferences prefs;
+    prefs.begin("wifi-config", true); // Read-only
+    String savedSSID = prefs.getString("ssid", "");
+    String savedPass = prefs.getString("pass", "");
+    prefs.end();
+
+    if (savedSSID.length() > 0) {
+        WiFi.begin(savedSSID.c_str(), savedPass.c_str());
+        tft.drawString("Connecting " + savedSSID, 160, 120, 2);
+        
+        // Timeout for WiFi
+        int limit = 0;
+        while (WiFi.status() != WL_CONNECTED && limit < 20) {
+            delay(500);
+            Serial.print(".");
+            limit++;
+        }
+        if (WiFi.status() == WL_CONNECTED) {
+            Serial.println("\nWiFi Connected");
+            tft.drawString("Connected!", 160, 140, 2);
+            delay(1000);
+        } else {
+             tft.drawString("WiFi Failed", 160, 140, 2);
+             delay(1000);
+        }
+    } else {
+        tft.drawString("No WiFi Configured", 160, 120, 2);
+        delay(1000);
     }
-    Serial.println("\nWiFi Done");
 
     // Initialize Pages
-    pages[2] = new WeatherPage(); // Swap because I want Weather first? No logic order.
+    pages[2] = new WeatherPage(); 
     pages[3] = new AlbumPage();
     pages[1] = new StockPage();
-    pages[0] = new MarketPage(); // 1. Market, 2. Stock, 3. Weather, 4. Album
+    pages[0] = new MarketPage(); 
+    pages[4] = new SettingsPage();
 
     for(int i=0; i<PAGE_COUNT; i++) {
         pages[i]->setup(&tft);
     }
     
-    // Default to Market
-    switchPage(0);
+    // Default to Settings if no WiFi, else Market
+    if (WiFi.status() != WL_CONNECTED) {
+        switchPage(4);
+    } else {
+        switchPage(0);
+    }
 }
 
 void loop() {
