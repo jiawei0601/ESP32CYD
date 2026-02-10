@@ -15,40 +15,37 @@ void StockPage::loop() {
 }
 
 void StockPage::draw() {
-    _tft->fillScreen(TFT_BLACK);
-    _tft->drawFastHLine(0, 30, 320, TT_BORDER_COLOR);
+    // 保留頂部導航欄
+    _tft->fillRect(0, 25, 320, 215, TFT_BLACK);
     _tft->setTextColor(TT_CYAN, TFT_BLACK);
-    _tft->drawCentreString("SINGLE ASSET VIEW", 160, 5, 2);
+    _tft->drawCentreString("SINGLE ASSET VIEW", 160, 32, 2);
+    _tft->drawFastHLine(0, 48, 320, TT_BORDER_COLOR);
 
-    _tft->drawRect(10, 40, 300, 180, TT_BORDER_COLOR);
+    _tft->drawRect(10, 55, 300, 175, TT_BORDER_COLOR);
 
     _tft->setTextDatum(MC_DATUM);
-    
-    // Symbol
     _tft->setTextColor(TFT_WHITE, TFT_BLACK);
-    _tft->drawCentreString(_symbol, 160, 70, 4);
+    _tft->drawCentreString(_symbol, 160, 85, 4);
 
-    // 決定字體顏色 (漲紅跌綠)
     uint32_t trendColor = (_change >= 0) ? TFT_RED : TFT_GREEN;
 
-    // Price / Loading
     if (_price <= 0) {
         _tft->setTextColor(TFT_YELLOW, TFT_BLACK);
-        _tft->drawCentreString("FETCHING DATA...", 160, 120, 4);
+        _tft->drawCentreString("FETCHING DATA...", 160, 135, 4);
     } else {
         _tft->setTextColor(trendColor, TFT_BLACK);
         char priceStr[20];
         sprintf(priceStr, "%.2f", _price);
-        _tft->drawCentreString(priceStr, 160, 120, 7);
+        _tft->drawCentreString(priceStr, 160, 135, 7);
         
         char changeStr[40];
         float changePercent = (_price > abs(_change)) ? (_change / (_price - _change)) * 100.0 : 0;
         sprintf(changeStr, "%+.2f (%.1f%%)", _change, changePercent);
-        _tft->drawCentreString(changeStr, 160, 180, 4);
+        _tft->drawCentreString(changeStr, 160, 195, 4);
     }
     
     _tft->setTextColor(TFT_WHITE, TFT_BLACK);
-    _tft->drawCentreString("CYD STOCK TICKER", 160, 205, 2);
+    _tft->drawCentreString("CYD STOCK TICKER", 160, 220, 2);
     _tft->setTextDatum(TL_DATUM); 
 }
 

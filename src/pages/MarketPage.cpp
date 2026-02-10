@@ -19,17 +19,18 @@ void MarketPage::loop() {
 }
 
 void MarketPage::draw() {
-    _tft->fillScreen(TFT_BLACK);
+    // 保留頂部導航欄，只清除下方區域
+    _tft->fillRect(0, 25, 320, 215, TFT_BLACK);
     _tft->setTextColor(TT_CYAN, TFT_BLACK);
-    _tft->drawCentreString("MARKET TICKER", 160, 5, 2);
-    _tft->drawFastHLine(0, 30, 320, TT_BORDER_COLOR);
+    _tft->drawCentreString("MARKET TICKER", 160, 32, 2);
+    _tft->drawFastHLine(0, 48, 320, TT_BORDER_COLOR);
 
     int w = 158;
-    int h = 98;
-    drawCell(0, 1, 35, w, h);
-    drawCell(1, 161, 35, w, h);
-    drawCell(2, 1, 137, w, h);
-    drawCell(3, 161, 137, w, h);
+    int h = 88; // 稍微縮短高度以適應下移
+    drawCell(0, 1, 52, w, h);
+    drawCell(1, 161, 52, w, h);
+    drawCell(2, 1, 142, w, h);
+    drawCell(3, 161, 142, w, h);
 }
 
 void MarketPage::drawCell(int idx, int x, int y, int w, int h) {

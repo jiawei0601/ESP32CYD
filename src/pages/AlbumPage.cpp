@@ -51,8 +51,9 @@ void AlbumPage::nextImage() {
     if (entry) {
         String name = entry.name();
         if (name.endsWith(".jpg") || name.endsWith(".JPG")) {
-            // Center image or fit
-            TJpgDec.drawJpg(0, 24, entry.name()); // Offset for topbar
+            // 清除內容區域並繪製，保留 Y=0~24 的導航欄
+            _tft->fillRect(0, 25, 320, 215, TFT_BLACK);
+            TJpgDec.drawJpg(0, 25, entry.name()); 
         }
         entry.close();
     }
