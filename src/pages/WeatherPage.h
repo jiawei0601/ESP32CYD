@@ -6,6 +6,19 @@
 #include <ArduinoJson.h>
 #include "../Config.h"
 
+struct DailyForecast {
+    String day;
+    float min;
+    float max;
+    int code;
+};
+
+struct HourlyForecast {
+    String time;
+    float temp;
+    int code;
+};
+
 class WeatherPage : public Page {
 public:
     void setup(TFT_eSPI* tft) override;
@@ -20,10 +33,16 @@ private:
     String _city;
     String _weatherDesc;
     float _temp;
+    float _feelsLike;
     int _humidity;
+    float _windSpeed;
     String _lastSavedCity = ""; 
     
+    DailyForecast _daily[5];
+    HourlyForecast _hourly[5];
+    
     void updateWeather();
+    String getWeatherText(int code);
 };
 
 #endif
