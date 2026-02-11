@@ -18,8 +18,18 @@
 
 ## ⚙️ 快速設定
 
+### 方法 A：直接燒錄 (推薦，適合非開發者)
+如果你不想設定開發環境，可以直接將本專案提供的二進位檔燒錄進 ESP32-CYD：
+1. 下載本專案的 `firmware_bundle` 資料夾。
+2. 使用 [ESP32 網頁燒錄器 (Web Flasher)](https://web.esphome.io/) 或 [ESP32 Flash Download Tool](https://www.espressif.com/en/support/download/other-tools)。
+3. 按照以下位址設定：
+   - `bootloader.bin` -> 位址 `0x1000`
+   - `partitions.bin` -> 位址 `0x8000`
+   - `firmware.bin` -> 位址 `0x10000`
+
+### 方法 B：自行編譯 (適合開發者)
 1. **編譯環境**：建議使用 VS Code 搭配 **PlatformIO** 插件進行編譯。
-2. **網路連接**：初次開機後，切換至第 5 頁（設定頁面員），掃描並連線您的 WiFi。
+2. **網路連接**：初次開機後，切換至第 5 頁（設定頁面），掃描並連線您的 WiFi。
 3. **自動安裝**：PlatformIO 會自動安裝必要的函式庫（`TFT_eSPI`、`ArduinoJson`、`TJpg_Decoder`、`XPT2046_Touchscreen`）。
 4. **燒錄程式**：透過 Micro USB 連接電腦後，執行 `Upload` 即可部署。
 
