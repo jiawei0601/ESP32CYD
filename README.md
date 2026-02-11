@@ -1,30 +1,43 @@
-# ESP32-CYD Multi-Function Display
+# ESP32-CYD 多功能儀表板
 
-example project for ESP32-CYD (Cheap Yellow Display) featuring:
-- **Market Dashboard**: Real-time BTC (Binance) & NASDAQ (Yahoo).
-- **Stock Monitor**: Taiwan Stock Index (mock/yahoo).
-- **Weather Station**: OpenWeatherMap.
-- **Photo Album**: Slide show from SD card.
-- **Settings**: WiFi Manager with on-screen keyboard.
+這是一個專為 ESP32-CYD ( Cheap Yellow Display / ESP32-2432S028) 設計的多功能顯示專案，具備精美的工作介面與即時數據更新功能。
 
-## Hardware Required
-- ESP32-CYD (ESP32-2432S028)
-- MicroSD Card (formatted FAT32) with `.jpg` images in root.
+## 🚀 主要功能
 
-## Setup
-1. **API Keys**: Edit `src/Config.h` for OpenWeatherMap API Key.
-2. **WiFi**: No need to edit code! Use the Settings page (Page 5) on the device to scan and connect.
-3. **Libraries**: PlatformIO will automatically install `TFT_eSPI`, `TFT_Touch`, `ArduinoJson`, `TJpg_Decoder`.
-4. **Upload**: Connect via USB and upload using PlatformIO.
+- **市場監控儀表板**：即時抓取 NASDAQ、NVDA、GOOGLE 指數以及 BTC 加密貨幣價格。
+- **台股指數監控**：即時顯示台灣加權指數 (TAIEX) 與漲跌幅。
+- **Aura 美化氣象站**：具備動態圖示（晴天、多雲、雨天）的氣象儀表板，支援城市自訂。
+- **數位相簿**：可播放 MicroSD 卡根目錄下的 `.jpg` 照片幻燈片。
+- **系統設置**：內建 WiFi 掃描器與螢幕鍵盤，無需修改程式碼即可連接網路。
+- **自動化功能**：包含 WiFi 斷線偵錯與自動重新連線機制。
 
-## Features
-- **Top Bar**: Touch the top blue bar to switch pages (1-5).
-- **Page 1 (Market)**: Shows NASDAQ and BTC prices.
-- **Page 2 (Stock)**: Shows TWSE Index.
-- **Page 3 (Weather)**: Current weather for configured city.
-- **Page 4 (Album)**: Slideshow of images from SD card.
-- **Page 5 (Settings)**: WiFi Scanner & Password Input.
+## 🛠 硬體設備
 
-## Notes
-- **APIs**: The project uses public APIs (Yahoo Finance, Binance). Use responsibly. 
-- **SD Card**: Ensure images are < 320x240 or they will be cropped/scaled. 
+- **ESP32-CYD (ESP32-2432S028)** 顯示器（內建 2.8 吋觸控螢幕）。
+- **MicroSD 卡** (格式化為 FAT32)，用於存放相簿圖片（圖片建議為 320x240）。
+
+## ⚙️ 快速設定
+
+1. **編譯環境**：建議使用 VS Code 搭配 **PlatformIO** 插件進行編譯。
+2. **網路連接**：初次開機後，切換至第 5 頁（設定頁面員），掃描並連線您的 WiFi。
+3. **自動安裝**：PlatformIO 會自動安裝必要的函式庫（`TFT_eSPI`、`ArduinoJson`、`TJpg_Decoder`、`XPT2046_Touchscreen`）。
+4. **燒錄程式**：透過 Micro USB 連接電腦後，執行 `Upload` 即可部署。
+
+## 📱 操作指南
+
+- **頂部導航欄**：點擊螢幕最上方的藍色數字條 (1-5) 可快速切換功能頁面。
+- **頁面 1 (市場)**：顯示納斯達克指數與熱門個股，支援 HTTPS 加密抓取，解決 401 權限問題。
+- **頁面 2 (股市)**：顯示台灣加權指數即時價格。
+- **頁面 3 (天氣)**：顯示您設定城市的氣溫、體感溫度與風速。
+- **頁面 4 (相簿)**：自動輪播 SD 卡內的照片（每 8 秒更換一張）。
+- **頁面 5 (設定)**：管理 WiFi 連線與設定氣象觀測城市。
+
+## 📝 開發筆記
+
+- **局部刷新機制**：介面採用局部刷新技術，確保在換頁時不會覆蓋頂部導航按鍵。
+- **API 強化**：金融數據採用 Brapi 與 Yahoo Finance 雙路徑備援，確保數據獲取穩定。
+- **介面優化**：針對螢幕觸控準確度與視覺美感進行了多次調優，提供 Premium 等級的視覺效果。
+
+## ⚠️ 注意事項
+- **相簿圖片**：請確保圖片解析度不超過 320x240。
+- **數據來源**：本專案使用公開 API (Yahoo Finance, Open-Meteo)，數據僅供參考。
