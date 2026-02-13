@@ -28,6 +28,7 @@ private:
 
     MarketAsset _assets[4]; 
     String _lastError = "None";
+    int _updatingIndex = 0;
     
     void updateMarket();
     void drawCell(int idx, int x, int y, int w, int h);

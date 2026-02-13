@@ -1,4 +1,5 @@
-.pio/build/esp32dev/src/main.cpp.o: src/main.cpp \
+.pio/build/esp32dev/src/main.cpp.o: src/main.cpp src/Config.h src/Page.h \
+ .pio/libdeps/esp32dev/TFT_eSPI/TFT_eSPI.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp_arduino_version.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/freertos/include/freertos/FreeRTOS.h \
@@ -133,7 +134,6 @@
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/tools/sdk/esp32/include/esp_hw_support/include/soc/esp32/spiram.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/cores/esp32/io_pin_remap.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/cores/esp32/Arduino.h \
- .pio/libdeps/esp32dev/TFT_eSPI/TFT_eSPI.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/cores/esp32/Print.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/SPI/src/SPI.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/cores/esp32/esp32-hal-spi.h \
@@ -231,7 +231,7 @@
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiUdp.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/cores/esp32/Udp.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/cores/esp32/cbuf.h \
- src/Config.h src/Page.h src/pages/WeatherPage.h src/pages/../Page.h \
+ src/pages/MarketPage.h src/pages/../Page.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/HTTPClient/src/HTTPClient.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src/WiFiClient.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src/WiFiClientSecure.h \
@@ -276,16 +276,7 @@
  .pio/libdeps/esp32dev/ArduinoJson/src/ArduinoJson.h \
  .pio/libdeps/esp32dev/ArduinoJson/src/ArduinoJson.hpp \
  .pio/libdeps/esp32dev/ArduinoJson/src/ArduinoJson/Configuration.hpp \
- src/pages/../Config.h src/pages/StockPage.h src/pages/MarketPage.h \
- src/pages/AlbumPage.h \
- C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/SD/src/SD.h \
- C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/FS/src/FS.h \
- C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/SD/src/sd_defines.h \
- .pio/libdeps/esp32dev/TJpg_Decoder/src/TJpg_Decoder.h \
- .pio/libdeps/esp32dev/TJpg_Decoder/src/User_Config.h \
- .pio/libdeps/esp32dev/TJpg_Decoder/src/tjpgd.h \
- .pio/libdeps/esp32dev/TJpg_Decoder/src/tjpgdcnf.h \
- C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/LittleFS/src/LittleFS.h \
- C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/SPIFFS/src/SPIFFS.h \
  src/pages/SettingsPage.h \
- C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/Preferences/src/Preferences.h
+ C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/Preferences/src/Preferences.h \
+ src/pages/StockPage.h src/pages/../Config.h src/pages/TickerPage.h \
+ src/pages/WeatherPage.h
