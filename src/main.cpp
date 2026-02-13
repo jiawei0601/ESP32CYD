@@ -5,15 +5,15 @@
 #include <WiFi.h>
 #include <XPT2046_Touchscreen.h>
 
-
 // Page Includes
 #include "pages/MarketPage.h"
 #include "pages/SettingsPage.h"
 #include "pages/StockPage.h"
-#include "pages/TickerPage.h" // 替換相簿為新的 Ticker 頁面
+// #include "pages/TickerPage.h" // 替換相簿為新的 Ticker 頁面 - This line is
+// removed as TickerPage is no longer used for pages[3]
+#include "pages/PomodoroPage.h" // 替換為番茄鐘
 #include "pages/WeatherPage.h"
 #include <Preferences.h>
-
 
 // Hardware
 TFT_eSPI tft = TFT_eSPI();
@@ -95,7 +95,7 @@ void setup() {
 
   // Initialize Pages
   pages[2] = new WeatherPage();
-  pages[3] = new TickerPage(); // 這裡由 AlbumPage 更換為 TickerPage
+  pages[3] = new PomodoroPage(); // 現在 Page 4 (index 3) 是番茄鐘
   pages[1] = new StockPage();
   pages[0] = new MarketPage();
   pages[4] = new SettingsPage();

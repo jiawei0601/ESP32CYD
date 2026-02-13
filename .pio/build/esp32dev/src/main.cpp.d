@@ -278,5 +278,5 @@
  .pio/libdeps/esp32dev/ArduinoJson/src/ArduinoJson/Configuration.hpp \
  src/pages/SettingsPage.h \
  C:/Users/TD/.platformio/packages/framework-arduinoespressif32/libraries/Preferences/src/Preferences.h \
- src/pages/StockPage.h src/pages/../Config.h src/pages/TickerPage.h \
+ src/pages/StockPage.h src/pages/../Config.h src/pages/PomodoroPage.h \
  src/pages/WeatherPage.h
